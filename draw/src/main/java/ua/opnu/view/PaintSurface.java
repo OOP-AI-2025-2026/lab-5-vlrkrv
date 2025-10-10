@@ -110,6 +110,12 @@ public class PaintSurface extends JComponent {
         this.shapeType = type;
     }
 
+    // Новий метод для очищення всіх фігур
+    public void clearShapes() {
+        shapes.clear();
+        repaint();
+    }
+
     /*
      * Метод paint викликається автоматично, коли відбувається перемалювання
      * вікна. Ми самі його не викликаємо!
