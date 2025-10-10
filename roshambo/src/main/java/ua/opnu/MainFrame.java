@@ -38,14 +38,17 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private GameShape generateShape() {
 
-        // TODO: написати логіку методу
-
         // Метод повертає об'єкт ігрової фігури (камінь, ножиці чи папір)
         // випадковим чином
 
         int random = new Random().nextInt(3);
 
-        return new GameShape(); // TODO: змініть на об'єкт потрібної фігури
+        switch (random) {
+            case 0: return new Rock();
+            case 1: return new Paper();
+            case 2: return new Scissors();
+        }
+        return new Rock();
     }
 
     private int checkWinner(GameShape player, GameShape computer) {
@@ -55,9 +58,21 @@ public class MainFrame extends JFrame implements ActionListener {
         // Метод повертає 0 якщо нічия (обидві фігури однакові)
         // Метод повертає -1 якщо переміг комп'ютер
 
-        // TODO: написати логіку методу
+        if (player.getClass().equals(computer.getClass())) {
+            return 0;
+        }
 
-        return 0;
+        if (player instanceof Rock && computer instanceof Scissors) {
+            return 1;
+        }
+        if (player instanceof Paper && computer instanceof Rock) {
+            return 1;
+        }
+        if (player instanceof Scissors && computer instanceof Paper) {
+            return 1;
+        }
+
+        return -1;
     }
 
     @Override
@@ -69,13 +84,13 @@ public class MainFrame extends JFrame implements ActionListener {
         // Визначаємо, на яку кнопку натиснув гравець
         switch (e.getActionCommand()) {
             case "rock":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Rock();
                 break;
             case "paper":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Paper();
                 break;
             case "scissors":
-                // присвоїти playerShape об'єкт відповідного класу
+                playerShape = new Scissors();
                 break;
         }
 
